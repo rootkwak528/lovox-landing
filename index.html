@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LOVOX - 거기 있어야, 느낄 수 있다</title>
+<meta name="description" content="LOVOX - 위치 + 시간 기반 라이브 이벤트 커뮤니티. 콘서트, 페스티벌, 팝업의 모든 순간을 함께."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&family=Inter:wght@300;400;500;600;700;800&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#f4ff25",
+                "background-dark": "#0a0a0a",
+                "accent": "#ff00ff",
+                "orange-accent": "#FF5500",
+                "vibrant-orange": "#ff6b00",
+                "dark": "#0a0a0a",
+                "light": "#ffffff",
+                "offwhite": "#F5F5F0",
+                gray: {
+                    50: '#fafafa', 100: '#f5f5f5', 200: '#e5e5e5',
+                    300: '#d4d4d4', 400: '#a3a3a3', 500: '#737373',
+                    600: '#525252', 700: '#404040', 800: '#262626', 900: '#171717',
+                }
+            },
+            fontFamily: {
+                "display": ["Hanken Grotesk", "sans-serif"],
+                logo: ["Montserrat", "sans-serif"],
+                body: ["Inter", "sans-serif"],
+                digital: ["Share Tech Mono", "monospace"],
+            },
+            borderRadius: {
+                'squircle': '24px',
+                'squircle-lg': '32px',
+                'squircle-sm': '16px',
+                "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"
+            },
+            keyframes: {
+                marquee: {
+                    '0%': { transform: 'translateX(0%)' },
+                    '100%': { transform: 'translateX(-100%)' },
+                },
+                'fade-up': {
+                    '0%': { opacity: '0', transform: 'translateY(30px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
+            },
+            animation: {
+                marquee: 'marquee 25s linear infinite',
+                'fade-up': 'fade-up 0.8s ease-out forwards',
+            }
+        },
+    },
+};
+</script>
+<style>
+.logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.material-symbols-outlined.filled {
+    font-variation-settings: 'FILL' 1;
+}
+.phone-mockup {
+    background: #1a1a1a;
+    border-radius: 40px;
+    padding: 12px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+}
+.phone-mockup img {
+    border-radius: 30px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+</style>
+</head>
+<body class="bg-background-dark font-display antialiased text-white">
+
+<!-- ===================== HERO ===================== -->
+<section class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-background-dark via-background-dark to-transparent z-0"></div>
+
+    <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto pt-24 pb-16">
+        <!-- Logo -->
+        <div class="flex items-center gap-4 mb-12">
+            <div class="bg-primary h-16 w-16 rounded-squircle flex flex-col items-center justify-center gap-1">
+                <div class="w-2.5 h-2.5 rounded-full bg-black"></div>
+                <span class="text-[9px] font-bold text-black tracking-wider">ONLINE</span>
+            </div>
+            <div class="bg-offwhite h-16 rounded-squircle flex items-center px-6">
+                <span class="text-3xl logo-text tracking-tighter text-black uppercase italic">Lovox</span>
+            </div>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl md:text-7xl font-black text-white leading-[0.95] tracking-tighter mb-6">
+            거기 있어야,<br/>느낄 수 있다.
+        </h1>
+        <p class="text-lg md:text-xl text-gray-400 font-medium max-w-lg mb-10 font-body">
+            콘서트, 페스티벌, 팝업의 모든 순간을<br class="hidden md:block"/> 현장에서 함께 느끼는 라이브 커뮤니티.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3">
+            <a href="#" class="bg-white text-black font-bold text-sm px-8 py-4 rounded-full flex items-center gap-3 hover:bg-gray-100 transition-colors">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+            </a>
+            <a href="#" class="bg-white text-black font-bold text-sm px-8 py-4 rounded-full flex items-center gap-3 hover:bg-gray-100 transition-colors">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 0 1 0 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/></svg>
+                Google Play
+            </a>
+        </div>
+    </div>
+
+    <!-- Marquee Ticker -->
+    <div class="relative w-[120%] -left-[10%] bg-vibrant-orange z-10 py-3 origin-center -rotate-2 mt-auto">
+        <div class="flex whitespace-nowrap overflow-hidden">
+            <div class="animate-marquee inline-block text-xs font-black uppercase tracking-widest text-black pl-4">
+                LIVE EVENT COMMUNITY • 현장에서 함께 느끼세요 • CONCERT • FESTIVAL • POPUP • K-POP • JAZZ • DJ • STREET FEST • LIVE EVENT COMMUNITY • 현장에서 함께 느끼세요 • CONCERT • FESTIVAL • POPUP • K-POP • JAZZ • DJ • STREET FEST •
+            </div>
+            <div aria-hidden="true" class="animate-marquee inline-block text-xs font-black uppercase tracking-widest text-black pl-4">
+                LIVE EVENT COMMUNITY • 현장에서 함께 느끼세요 • CONCERT • FESTIVAL • POPUP • K-POP • JAZZ • DJ • STREET FEST • LIVE EVENT COMMUNITY • 현장에서 함께 느끼세요 • CONCERT • FESTIVAL • POPUP • K-POP • JAZZ • DJ • STREET FEST •
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SPOT LIFECYCLE ===================== -->
+<section class="py-24 md:py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs font-bold text-primary uppercase tracking-[0.3em] mb-4 block">How it works</span>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter">이렇게 작동해요</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Off-Spot -->
+            <div class="bg-offwhite text-black rounded-squircle p-6 flex flex-col gap-4 min-h-[240px]">
+                <div class="flex items-center justify-between">
+                    <div class="w-12 h-12 rounded-squircle-sm bg-gray-200 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl text-gray-600">explore_off</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Step 1</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-extrabold uppercase tracking-tight mb-2">Off-Spot</h3>
+                    <p class="text-sm text-gray-600 font-medium leading-relaxed">
+                        아직 현장이 아닌 상태. 홈 피드에서 다가오는 이벤트를 탐색하고, 관심 스팟을 찜해두세요.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pre-Spot -->
+            <div class="bg-offwhite text-black rounded-squircle p-6 flex flex-col gap-4 min-h-[240px]">
+                <div class="flex items-center justify-between">
+                    <div class="w-12 h-12 rounded-squircle-sm bg-vibrant-orange/20 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl text-vibrant-orange">timer</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Step 2</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-extrabold uppercase tracking-tight mb-2">Pre-Spot</h3>
+                    <p class="text-sm text-gray-600 font-medium leading-relaxed">
+                        카운트다운 시작! D-day까지 실시간 타이머와 함께, 기대감을 나누는 커뮤니티가 열립니다.
+                    </p>
+                </div>
+                <div class="font-digital text-lg text-vibrant-orange tracking-widest tabular-nums mt-auto">
+                    D-05:12:30:00
+                </div>
+            </div>
+
+            <!-- On-Spot -->
+            <div class="bg-offwhite text-black rounded-squircle p-6 flex flex-col gap-4 min-h-[240px]">
+                <div class="flex items-center justify-between">
+                    <div class="w-12 h-12 rounded-squircle-sm bg-green-100 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl text-green-600">location_on</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Step 3</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-extrabold uppercase tracking-tight mb-2">On-Spot</h3>
+                    <p class="text-sm text-gray-600 font-medium leading-relaxed">
+                        현장 도착! 라이브 채팅, 실시간 공지, 타임테이블을 확인하며 현장을 120% 즐기세요.
+                    </p>
+                </div>
+                <div class="flex gap-1 mt-auto">
+                    <span class="px-2 py-1 bg-black text-white text-[10px] font-bold rounded-lg uppercase">Live Chat</span>
+                    <span class="px-2 py-1 bg-gray-200 text-gray-600 text-[10px] font-bold rounded-lg uppercase">Notice</span>
+                </div>
+            </div>
+
+            <!-- Passport -->
+            <div class="bg-offwhite text-black rounded-squircle p-6 flex flex-col gap-4 min-h-[240px]">
+                <div class="flex items-center justify-between">
+                    <div class="w-12 h-12 rounded-squircle-sm bg-primary/30 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl text-black">book</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Step 4</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-extrabold uppercase tracking-tight mb-2">Passport</h3>
+                    <p class="text-sm text-gray-600 font-medium leading-relaxed">
+                        모든 방문이 기록됩니다. 연도별 타임라인으로 나만의 이벤트 히스토리를 만들어가세요.
+                    </p>
+                </div>
+                <div class="flex gap-2 mt-auto">
+                    <span class="px-2 py-1 bg-black text-white text-[10px] font-bold rounded-lg uppercase">Visited</span>
+                    <span class="px-2 py-1 bg-gray-200 text-gray-500 text-[10px] font-bold rounded-lg uppercase">Bucket</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== APP SCREEN SHOWCASE ===================== -->
+<section class="py-24 md:py-32 px-6 bg-background-dark relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-transparent to-gray-900/50 pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+            <span class="text-xs font-bold text-primary uppercase tracking-[0.3em] mb-4 block">App Preview</span>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter">모든 순간을 경험하세요</h2>
+            <p class="text-gray-400 mt-4 font-body text-lg">홈, 라이브 채팅, 패스포트, 검색까지</p>
+        </div>
+
+        <div class="flex gap-6 overflow-x-auto no-scrollbar pb-8 justify-start md:justify-center px-4">
+            <div class="phone-mockup flex-shrink-0 w-[220px] md:w-[260px]">
+                <img src="screens/home/screen.png" alt="LOVOX Home Screen" loading="lazy"/>
+            </div>
+            <div class="phone-mockup flex-shrink-0 w-[220px] md:w-[260px]">
+                <img src="screens/on-spot livechat/screen.png" alt="LOVOX Live Chat Screen" loading="lazy"/>
+            </div>
+            <div class="phone-mockup flex-shrink-0 w-[220px] md:w-[260px]">
+                <img src="screens/passport/screen.png" alt="LOVOX Passport Screen" loading="lazy"/>
+            </div>
+            <div class="phone-mockup flex-shrink-0 w-[220px] md:w-[260px]">
+                <img src="screens/search/screen.png" alt="LOVOX Search Screen" loading="lazy"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== KEY FEATURES GRID ===================== -->
+<section class="py-24 md:py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs font-bold text-primary uppercase tracking-[0.3em] mb-4 block">Features</span>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter">스팟에서 필요한 모든 것</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Live Chat -->
+            <div class="bg-gray-800/50 border border-white/10 rounded-squircle p-6 flex flex-col gap-4 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-squircle-sm bg-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl text-black">chat</span>
+                </div>
+                <h3 class="text-lg font-extrabold uppercase tracking-tight">라이브 채팅</h3>
+                <p class="text-sm text-gray-400 font-medium leading-relaxed font-body">
+                    같은 현장에 있는 사람들과 실시간 소통. GPS 기반으로 현장 참여자만 채팅에 참여합니다.
+                </p>
+            </div>
+
+            <!-- Smart Notice -->
+            <div class="bg-gray-800/50 border border-white/10 rounded-squircle p-6 flex flex-col gap-4 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-squircle-sm bg-vibrant-orange flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl text-black">campaign</span>
+                </div>
+                <h3 class="text-lg font-extrabold uppercase tracking-tight">스마트 공지</h3>
+                <p class="text-sm text-gray-400 font-medium leading-relaxed font-body">
+                    게이트 혼잡도, 굿즈 현황, 날씨 알림까지. 현장에서 놓치면 안 되는 정보를 실시간 전달합니다.
+                </p>
+            </div>
+
+            <!-- Countdown -->
+            <div class="bg-gray-800/50 border border-white/10 rounded-squircle p-6 flex flex-col gap-4 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-squircle-sm bg-orange-accent flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl text-black">timer</span>
+                </div>
+                <h3 class="text-lg font-extrabold uppercase tracking-tight">카운트다운</h3>
+                <p class="text-sm text-gray-400 font-medium leading-relaxed font-body">
+                    D-day까지 실시간 카운트다운. 기다리는 시간도 함께라면 설렘이 됩니다.
+                </p>
+            </div>
+
+            <!-- Passport -->
+            <div class="bg-gray-800/50 border border-white/10 rounded-squircle p-6 flex flex-col gap-4 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-squircle-sm bg-accent/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl text-accent">book</span>
+                </div>
+                <h3 class="text-lg font-extrabold uppercase tracking-tight">이벤트 패스포트</h3>
+                <p class="text-sm text-gray-400 font-medium leading-relaxed font-body">
+                    방문한 모든 이벤트가 자동 기록. 연도별 타임라인으로 나만의 히스토리를 만들어가세요.
+                </p>
+            </div>
+
+            <!-- Nearby Discovery -->
+            <div class="bg-gray-800/50 border border-white/10 rounded-squircle p-6 flex flex-col gap-4 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-squircle-sm bg-green-500/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl text-green-400">near_me</span>
+                </div>
+                <h3 class="text-lg font-extrabold uppercase tracking-tight">주변 발견</h3>
+                <p class="text-sm text-gray-400 font-medium leading-relaxed font-body">
+                    GPS 기반으로 주변에서 진행 중인 스팟을 자동 탐지. 지금 근처에서 무슨 일이 벌어지고 있는지 확인하세요.
+                </p>
+            </div>
+
+            <!-- Trending -->
+            <div class="bg-gray-800/50 border border-white/10 rounded-squircle p-6 flex flex-col gap-4 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-squircle-sm bg-white/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl text-white">trending_up</span>
+                </div>
+                <h3 class="text-lg font-extrabold uppercase tracking-tight">트렌딩</h3>
+                <p class="text-sm text-gray-400 font-medium leading-relaxed font-body">
+                    지금 가장 핫한 이벤트와 아티스트를 트렌딩 키워드로 한눈에. 놓치고 싶지 않은 순간들.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SAMPLE CONTENT ===================== -->
+<section class="py-24 md:py-32 px-6 overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs font-bold text-primary uppercase tracking-[0.3em] mb-4 block">Spots</span>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter">K-Pop부터 재즈까지</h2>
+            <p class="text-gray-400 mt-4 font-body text-lg">장르를 가리지 않는, 모든 현장의 커뮤니티</p>
+        </div>
+
+        <div class="flex gap-4 overflow-x-auto no-scrollbar pb-6 -mx-6 px-6">
+            <!-- BTS -->
+            <article class="flex-shrink-0 w-[280px] flex flex-col gap-2">
+                <div class="relative h-[200px] rounded-squircle overflow-hidden bg-gray-800 group">
+                    <img alt="BTS Concert" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0Gr-HTKJSrgR9Tw7AP2FA9Kj866V4F4zNW-eb2AFLxKs76NBSRN1WRet2EV5Xey6ZLV8t-Z6Rl7w6i-jLdcNG5_zNvK2ICEZjenpEy4GSySDZLAUXNmb-5d3GQ_5gjWUaDi1ax521Zap6x2rV2PTJCaZZSQaYqheTqrlOLuHLFZ-8zMzompnfp4i8Rt3k6SWc3S_expz8i1smz0ik5fw7C5c4WytyuHrg7hPtJ8-6cFMzYQF8_Ze8Z0MxaKGVF3-75zwVQBuP06mI"/>
+                    <div class="absolute top-2 left-2 px-2 py-1 rounded-lg bg-orange-accent flex items-center justify-center">
+                        <span class="text-[10px] font-black text-black leading-none">D-5</span>
+                    </div>
+                    <div class="absolute bottom-2 right-2 w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-[16px] filled">favorite</span>
+                    </div>
+                </div>
+                <div class="bg-offwhite rounded-squircle p-4 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-black text-black leading-none tracking-tighter uppercase mb-0.5 logo-text">BTS</h2>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest truncate">Permission to Dance</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 border-t border-gray-300/50 pt-2 mt-3">
+                        <div>
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Date</span>
+                            <span class="block text-xs font-bold text-black">Jan 21, '26</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Venue</span>
+                            <span class="block text-xs font-bold text-black truncate">Jamsil Stadium</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- IVE -->
+            <article class="flex-shrink-0 w-[280px] flex flex-col gap-2">
+                <div class="relative h-[200px] rounded-squircle overflow-hidden bg-gray-800 group">
+                    <img alt="IVE Concert" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTQdcHUQ-5h-Yh_QQ8SF3A0K8Rbzpouxj6UPpFaBdJrpWnFffnMhXQqQ7XTHdBjKR4Z0kEKtsIif_ynyCnZ03kWzUikRJXru_aS2D2gyjZucyhHba0bDVBydHxLfFF0-mRy37m_Zcy5twyLXo1MXvXR87G0hUW0v8QbGn2Sab8VmB-0FKtuFeUNab76xqqAObjo78It2qIr7W8a-JPW9nKMRaoKK6qfRV-rZ7T3zYAdnppdv6HflDqMd5la8isMjO3ocjiXmctXJ-k"/>
+                    <div class="absolute top-2 left-2 px-2 py-1 rounded-lg bg-orange-accent flex items-center justify-center">
+                        <span class="text-[10px] font-black text-black leading-none">D-2</span>
+                    </div>
+                    <div class="absolute bottom-2 right-2 w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-[16px] filled">favorite</span>
+                    </div>
+                </div>
+                <div class="bg-offwhite rounded-squircle p-4 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-black text-black leading-none tracking-tighter uppercase mb-0.5 logo-text">IVE</h2>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest truncate">Show What I Have</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 border-t border-gray-300/50 pt-2 mt-3">
+                        <div>
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Date</span>
+                            <span class="block text-xs font-bold text-black">Oct 19, '25</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Venue</span>
+                            <span class="block text-xs font-bold text-black truncate">Jangchung Arena</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- NewJeans -->
+            <article class="flex-shrink-0 w-[280px] flex flex-col gap-2">
+                <div class="relative h-[200px] rounded-squircle overflow-hidden bg-gray-800 group">
+                    <img alt="NewJeans Concert" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlDFvSr1oFNbqA8T9CNhIRtU_8RzoIPm8BSmvi2hbxupkSLNYaSAICpdibePvUhACdwFiq4CpmoYB-q_96nNTVaN53-fHshmow-tRjEMMRRfAVtHaLvDyvtrNBpAM6D3tJ55cJPRrmFE4eFb6SRr7y600ocNZfI-cRwQN3cBb6HAEPvNWtpoLupce7WFx-pL7ioHSE3cuIe3YJ6LyIOkvMgUqIG6phWoM4ejQa1KX6Ayqdu3iWVOGPOaAfk8660KX2-Zm4tOI-A9bY"/>
+                    <div class="absolute top-2 left-2 px-2 py-1 rounded-lg bg-orange-accent flex items-center justify-center">
+                        <span class="text-[10px] font-black text-black leading-none">D-5</span>
+                    </div>
+                    <div class="absolute bottom-2 right-2 w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-[16px]">favorite</span>
+                    </div>
+                </div>
+                <div class="bg-offwhite rounded-squircle p-4 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-black text-black leading-none tracking-tighter uppercase mb-0.5 logo-text">NewJeans</h2>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest truncate">Bunnies Camp 2026</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 border-t border-gray-300/50 pt-2 mt-3">
+                        <div>
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Date</span>
+                            <span class="block text-xs font-bold text-black">Jun 26, '26</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Venue</span>
+                            <span class="block text-xs font-bold text-black truncate">Tokyo Dome</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Street Fest -->
+            <article class="flex-shrink-0 w-[280px] flex flex-col gap-2">
+                <div class="relative h-[200px] rounded-squircle overflow-hidden bg-gray-800 group">
+                    <img alt="Street Fest" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB44xmmBtTeWrq9asENN4vTQ3SuRDdAbo6cYrX_z_TCsCWJJ01ux3yDjdOKMzCM4tmw2JX4lacTp4fGknTN1SDS8A3d-RII1CZ-FbLtS9S72npsLT0DZrdKGESSVhptoDtDz3eSSBVJbU6pqib9xT1M37VKeFYgQF5_tx0WJgHdsFFFAu6b2IWYGzPEAubf8G28UV0VKy_IYpNYFaCtQQuJ4DCQ5qw1jhmOSG9TgXdFCuI9POHFJpG80XfondZ8qa5VdJZSW0wSp5rp"/>
+                    <div class="absolute top-2 left-2 px-2 py-1 rounded-lg bg-green-500 flex items-center justify-center">
+                        <span class="text-[10px] font-black text-black leading-none">NOW</span>
+                    </div>
+                    <div class="absolute bottom-2 right-2 w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-[16px]">favorite</span>
+                    </div>
+                </div>
+                <div class="bg-offwhite rounded-squircle p-4 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-black text-black leading-none tracking-tighter uppercase mb-0.5 logo-text">Street Fest</h2>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest truncate">Live DJ Set - Open Air</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 border-t border-gray-300/50 pt-2 mt-3">
+                        <div>
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Time</span>
+                            <span class="block text-xs font-bold text-black">Until 10 PM</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Venue</span>
+                            <span class="block text-xs font-bold text-black truncate">City Square</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Jazz Night -->
+            <article class="flex-shrink-0 w-[280px] flex flex-col gap-2">
+                <div class="relative h-[200px] rounded-squircle overflow-hidden bg-gray-800 group">
+                    <img alt="Jazz Night" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCvuPwDxKBrjEzOankhPcqYhy3sKax_K2flFrcS8NG7jHCfK4FVH8IraSgEDEJIia72QsHG4TgsTazREKhORPbHcRqW5MBMEZZ7Z6Hswt3H7cVjvF1pjwSeLSO5Qg1bNDwLk2xeC0UrOcE8tNSSR-PWMrCxF5xgm6dQdwvwJpyDYS9E210UsuMasWL-V-KSmR86Wtct75GIIZbAJhAYOFtRu34dEUPMESHKw0stAxmnRwI90ew0ISNNvRTHQ29Uqx4ITbjcURkLQku"/>
+                    <div class="absolute top-2 left-2 px-2 py-1 rounded-lg bg-green-500 flex items-center justify-center">
+                        <span class="text-[10px] font-black text-black leading-none">NOW</span>
+                    </div>
+                    <div class="absolute bottom-2 right-2 w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <span class="material-symbols-outlined text-accent text-[16px] filled">favorite</span>
+                    </div>
+                </div>
+                <div class="bg-offwhite rounded-squircle p-4 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-black text-black leading-none tracking-tighter uppercase mb-0.5 logo-text">Jazz Night</h2>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest truncate">Blue Note Popup</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 border-t border-gray-300/50 pt-2 mt-3">
+                        <div>
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Time</span>
+                            <span class="block text-xs font-bold text-black">Live Now</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[8px] uppercase font-bold text-gray-400 tracking-widest mb-0.5">Venue</span>
+                            <span class="block text-xs font-bold text-black truncate">Riverside Park</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FOOTER CTA ===================== -->
+<footer class="py-24 md:py-32 px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto text-center">
+        <!-- Logo -->
+        <div class="flex items-center justify-center gap-3 mb-8">
+            <div class="bg-primary h-14 w-14 rounded-squircle flex flex-col items-center justify-center gap-1">
+                <div class="w-2 h-2 rounded-full bg-black"></div>
+                <span class="text-[8px] font-bold text-black tracking-wider">ONLINE</span>
+            </div>
+            <span class="text-3xl logo-text tracking-tighter text-white uppercase italic">Lovox</span>
+        </div>
+
+        <p class="text-xl md:text-2xl font-bold text-gray-300 mb-10 max-w-md mx-auto">
+            다음 현장에서 만나요.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-center mb-16">
+            <a href="#" class="bg-primary text-black font-bold text-sm px-8 py-4 rounded-full flex items-center justify-center gap-3 hover:brightness-110 transition-colors">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+            </a>
+            <a href="#" class="bg-primary text-black font-bold text-sm px-8 py-4 rounded-full flex items-center justify-center gap-3 hover:brightness-110 transition-colors">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 0 1 0 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/></svg>
+                Google Play
+            </a>
+        </div>
+
+        <!-- Social Links -->
+        <div class="flex items-center justify-center gap-6 mb-12">
+            <a href="#" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-gray-400">link</span>
+            </a>
+            <a href="#" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-gray-400">mail</span>
+            </a>
+            <a href="#" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-gray-400">share</span>
+            </a>
+        </div>
+
+        <p class="text-xs text-gray-600 font-body">&copy; 2026 LOVOX. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
