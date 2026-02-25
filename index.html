@@ -190,21 +190,12 @@ tailwind.config = {
     color: white;
 }
 
-/* Phones horizontal scroll (mobile) */
-.phones-scroll {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
-    padding-bottom: 8px;
-}
-.phones-scroll::-webkit-scrollbar { display: none; }
-.phones-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-.phones-scroll > img {
-    flex-shrink: 0;
-    scroll-snap-align: center;
+/* Section phone parallax (sections 2 & 4) */
+.section-phone {
+    border-radius: 28px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    will-change: transform;
 }
 </style>
 </head>
@@ -276,7 +267,7 @@ tailwind.config = {
 </div>
 
 <!-- ===================== SECTION 2: 홈 | 탐색 ===================== -->
-<section class="py-24 md:py-32 overflow-hidden">
+<section class="py-24 md:py-32 overflow-hidden" id="section2-scrolly">
     <div class="max-w-6xl mx-auto px-6">
         <div class="reveal flex flex-col md:flex-row items-start gap-10 md:gap-16">
             <!-- Text -->
@@ -286,9 +277,9 @@ tailwind.config = {
             </div>
             <!-- Phone mockups -->
             <div class="flex-1 w-full">
-                <div class="phones-scroll -mx-6 px-6 md:mx-0 md:px-0 md:overflow-visible">
-                    <img src="images/home-screen.webp" alt="LOVOX Home Screen" class="w-[72vw] md:w-[260px] flex-shrink-0 scroll-snap-align-center" loading="lazy"/>
-                    <img src="images/search-screen.webp" alt="LOVOX Search Screen" class="w-[72vw] md:w-[260px] flex-shrink-0 scroll-snap-align-center mt-12 md:mt-16" loading="lazy"/>
+                <div class="flex gap-3 md:gap-4 items-start justify-center md:justify-start">
+                    <img src="images/home-screen.webp" alt="LOVOX Home Screen" class="section-phone w-[42vw] md:w-[260px]" id="s2-phone1" loading="lazy"/>
+                    <img src="images/search-screen.webp" alt="LOVOX Search Screen" class="section-phone w-[42vw] md:w-[260px] mt-12 md:mt-16" id="s2-phone2" loading="lazy"/>
                 </div>
             </div>
         </div>
@@ -350,7 +341,7 @@ tailwind.config = {
 </section>
 
 <!-- ===================== SECTION 4: 패스포트 ===================== -->
-<section class="py-24 md:py-32 overflow-hidden">
+<section class="py-24 md:py-32 overflow-hidden" id="section4-scrolly">
     <div class="max-w-6xl mx-auto px-6">
         <div class="reveal flex flex-col md:flex-row-reverse items-start gap-10 md:gap-16">
             <!-- Text -->
@@ -360,9 +351,9 @@ tailwind.config = {
             </div>
             <!-- Phone mockups -->
             <div class="flex-1 w-full">
-                <div class="phones-scroll -mx-6 px-6 md:mx-0 md:px-0 md:overflow-visible">
-                    <img src="images/passport-screen.webp" alt="LOVOX Passport Screen" class="w-[72vw] md:w-[260px] flex-shrink-0 scroll-snap-align-center" loading="lazy"/>
-                    <img src="images/passport-screen2.webp" alt="LOVOX Passport Screen 2" class="w-[72vw] md:w-[260px] flex-shrink-0 scroll-snap-align-center mt-12 md:mt-16" loading="lazy"/>
+                <div class="flex gap-3 md:gap-4 items-start justify-center md:justify-start">
+                    <img src="images/passport-screen.webp" alt="LOVOX Passport Screen" class="section-phone w-[42vw] md:w-[260px]" id="s4-phone1" loading="lazy"/>
+                    <img src="images/passport-screen2.webp" alt="LOVOX Passport Screen 2" class="section-phone w-[42vw] md:w-[260px] mt-12 md:mt-16" id="s4-phone2" loading="lazy"/>
                 </div>
             </div>
         </div>
@@ -627,6 +618,44 @@ tailwind.config = {
     }, { passive: true });
 
     updateScroll();
+})();
+</script>
+
+<script>
+(function() {
+    function setupParallax(sectionId, phone1Id, phone2Id) {
+        var section = document.getElementById(sectionId);
+        var phone1 = document.getElementById(phone1Id);
+        var phone2 = document.getElementById(phone2Id);
+        if (!section || !phone1 || !phone2) return;
+
+        var ticking = false;
+
+        function update() {
+            var rect = section.getBoundingClientRect();
+            var wh = window.innerHeight;
+            // 0 = section just entering viewport bottom, 1 = section just left viewport top
+            var progress = Math.max(0, Math.min(1, (wh - rect.top) / (wh + section.offsetHeight)));
+
+            // Phones shift right as you scroll down
+            phone1.style.transform = 'translateX(' + ((progress - 0.5) * 80) + 'px)';
+            phone2.style.transform = 'translateX(' + ((progress - 0.5) * 160) + 'px)';
+
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(update);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        update();
+    }
+
+    setupParallax('section2-scrolly', 's2-phone1', 's2-phone2');
+    setupParallax('section4-scrolly', 's4-phone1', 's4-phone2');
 })();
 </script>
 
